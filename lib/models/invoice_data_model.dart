@@ -72,7 +72,7 @@ class Address {
     required this.citySubdivisionName,
     required this.cityName,
     required this.postalZone,
-    required this.countryCode,
+      this.countryCode= "SA",
   });
 }
 

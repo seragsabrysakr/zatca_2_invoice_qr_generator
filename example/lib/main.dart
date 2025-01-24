@@ -11,10 +11,30 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final qrDataModel = generateZatcaQrInit(
-    totalVat: "15.0",
-    totalWithVat: "100.0",
-    issueDate: "2022-08-17",
-    issueTime: "17:41:08",
+    totalVat: "20.0",
+    totalWithVat: "500.0",
+    issueDate: "2024-01-17",
+    issueTime: "05:41:08",
+    invoiceUUid: "8e6000cf-1a98-4174-b3e7-b5d5954bc10d",
+    invoiceNumber: "INV0001",
+    invoiceLines: [
+      InvoiceLine(
+        id: '1',
+        quantity: '10',
+        unitCode: 'PCE',
+        lineExtensionAmount: '100.00',
+        itemName: 'Item 1',
+        taxPercent: '15',
+      ),
+      InvoiceLine(
+        id: '2',
+        quantity: '1',
+        unitCode: 'PCE',
+        lineExtensionAmount: '200.00',
+        itemName: 'Item 1',
+        taxPercent: '15',
+      ),
+    ],
     invoiceType: ZatcaConstants.invoiceType,
     sellerName: ZatcaConstants.companyName,
     sellerTRN: ZatcaConstants.taxRegistrationNumber,
@@ -29,7 +49,6 @@ class MyApp extends StatelessWidget {
         citySubdivisionName: ZatcaConstants.area,
         cityName: ZatcaConstants.cityName,
         postalZone: ZatcaConstants.postalZone,
-        countryCode: "SA",
       ),
     ),
   );
@@ -50,7 +69,6 @@ class MyApp extends StatelessWidget {
           child: Zatca2InvoiceQrGenerator(qrDataModel: qrDataModel),
         ),
       ),
-      
     );
   }
 }

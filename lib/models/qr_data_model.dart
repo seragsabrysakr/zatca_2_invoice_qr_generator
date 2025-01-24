@@ -1,4 +1,4 @@
-import 'package:zatca_2_invoice/zatca_2_invoice_generator.dart';
+import 'package:zatca_2_invoice_generator/zatca_2_invoice_generator.dart';
 
 class QrDataModel {
   final String sellerName; // Seller's name
@@ -10,14 +10,14 @@ class QrDataModel {
   final String certificateSignature;
   final InvoiceData invoiceData;
 
-  QrDataModel(
-      {required this.sellerName,
-      required this.sellerTRN,
-      required this.issueDate,
-      required this.invoiceHash,
-      required this.digitalSignature,
-      required this.publicKey,
-      required this.certificateSignature,
-      required this.invoiceData,
-      });
+  QrDataModel({
+    required this.sellerName,
+    required this.sellerTRN,
+    required this.issueDate,
+    required this.invoiceHash,
+    required this.digitalSignature,
+    required this.publicKey,
+    required this.certificateSignature,
+    required this.invoiceData,
+  });
 }

@@ -1,7 +1,7 @@
-name: zatca_2_invoice
-description: "A new Flutter plugin project."
+name: zatca_2_invoice_generator
+description: "Plugin for generating ZATCA 2 invoice QR code"
 version: 0.0.1
-homepage:
+homepage: https://github.com/seragsabrysakr/zatca_2_invoice_qr_generator.git
 
 environment:
   sdk: ^3.6.0
@@ -27,16 +27,4 @@ dev_dependencies:
 
 flutter:
 
-  plugin:
-    platforms:
-      android:
-        package: com.example.zatca_2_invoice
-        pluginClass: Zatca2InvoicePlugin
-      ios:
-        pluginClass: Zatca2InvoicePlugin
-      linux:
-        pluginClass: Zatca2InvoicePlugin
-      macos:
-        pluginClass: Zatca2InvoicePlugin
-      windows:
-        pluginClass: Zatca2InvoicePluginCApi
+

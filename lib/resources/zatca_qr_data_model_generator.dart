@@ -1,8 +1,5 @@
 import 'dart:convert';
-
-import 'package:zatca_2_invoice/models/qr_data_model.dart';
-import 'package:zatca_2_invoice/resources/enums.dart';
-import 'package:zatca_2_invoice/zatca_2_invoice_generator.dart';
+import 'package:zatca_2_invoice_generator/zatca_2_invoice_generator.dart';
 
 QrDataModel generateZatcaQrInit({
   required Supplier supplier,

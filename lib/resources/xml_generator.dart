@@ -1,6 +1,6 @@
 import 'package:xml/xml.dart';
-import 'package:zatca_2_invoice/models/invoice_data_model.dart';
-
+import 'package:zatca_2_invoice_generator/zatca_2_invoice_generator.dart';
+ 
 String generateZATCAXml(InvoiceData data) {
   final builder = XmlBuilder();
   builder.processing('xml', 'version="1.0" encoding="UTF-8"');

@@ -3,8 +3,8 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:qr_bar_code/qr/qr.dart';
-import 'package:zatca_2_invoice/models/qr_data_model.dart';
-
+import 'package:zatca_2_invoice_generator/zatca_2_invoice_generator.dart';
+ 
 class Zatca2InvoiceQrGenerator extends StatelessWidget {
   const Zatca2InvoiceQrGenerator({
     super.key,
@@ -14,7 +14,7 @@ class Zatca2InvoiceQrGenerator extends StatelessWidget {
     this.size = 200,
   });
 
-  final QrDataModel qrDataModel; // Seller's name
+  final QrDataModel qrDataModel; 
 // Certificate authority signature
   final double size; // Size of the QR code
   final Color backgroundColor; // Background color of the QR code

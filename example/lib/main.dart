@@ -1,7 +1,6 @@
 import 'package:example/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:zatca_2_invoice/zatca_2_invoice.dart';
-import 'package:zatca_2_invoice/zatca_2_invoice_generator.dart';
+ import 'package:zatca_2_invoice/zatca_2_invoice_generator.dart';
 
 void main() {
   runApp(MyApp());

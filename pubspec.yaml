@@ -13,6 +13,11 @@ dependencies:
   plugin_platform_interface: ^2.0.2
   qr_bar_code: ^1.1.0
   asn1lib: ^1.5.8
+  xml:
+  convert: ^3.1.0
+  crypto: ^3.0.0
+  pointycastle: ^3.0.1
+
   
 
 dev_dependencies:

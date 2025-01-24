@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:qr_bar_code/qr/qr.dart';
-import 'dart:convert';
-import 'dart:typed_data';
 
-class Zatca2Invoice extends StatelessWidget {
-  const Zatca2Invoice({
+class Zatca2InvoiceQrGenerator extends StatelessWidget {
+  const Zatca2InvoiceQrGenerator({
     super.key,
     required this.sellerName,
     required this.sellerTRN,
@@ -14,72 +13,66 @@ class Zatca2Invoice extends StatelessWidget {
     required this.totalVat,
     required this.issueDate,
     required this.invoiceHash,
-    // required this.digitalSignature,
-    // required this.publicKey,
-    // required this.certificateSignature,
+    required this.digitalSignature,
+    required this.publicKey,
+    required this.certificateSignature,
     this.backgroundColor = Colors.transparent,
     this.size = 200,
-    this.eyeStyle,
   });
 
-  final String sellerName;
-  final String sellerTRN;
-  final String totalWithVat;
-  final String totalVat;
-  final String issueDate;
-  final String invoiceHash; // New parameter for invoice hash
-  // final String digitalSignature; // New parameter for digital signature
-  // final String publicKey; // New parameter for public key
-  // final String certificateSignature; // New parameter for certificate signature
-  final double size;
-  final Color backgroundColor;
-  final QREyeStyle? eyeStyle;
+  final String sellerName; // Seller's name
+  final String sellerTRN; // Seller's VAT registration number
+  final String totalWithVat; // Invoice total (including VAT)
+  final String totalVat; // Total VAT amount
+  final String issueDate; // ISO 8601 format date and time
+  final String invoiceHash; // SHA-256 hash of the invoice
+  final String digitalSignature; // ECDSA digital signature
+  final String publicKey; // Base64-encoded public key
+  final String certificateSignature; // Certificate authority signature
+  final double size; // Size of the QR code
+  final Color backgroundColor; // Background color of the QR code
 
+  /// Generates the QR code content by creating a TLV string and encoding it to Base64.
   String _getQrCodeContent() {
+    // Map of tag-value pairs for the ZATCA QR code
     Map<int, String> invoiceData = {
-      1: sellerName, // Seller name
-      2: sellerTRN, // VAT registration number
-      3: issueDate, // Timestamp 2024-05-30T12:30:00Z
-      4: totalWithVat, // Invoice total amount
-      5: totalVat, // VAT total amount
-      6: invoiceHash // VAT total amount
+      1: sellerName,
+      2: sellerTRN,
+      3: issueDate,
+      4: totalWithVat,
+      5: totalVat,
+      6: invoiceHash,
+      7: digitalSignature,
+      8: publicKey,
+      9: certificateSignature,
     };
 
-    String tlvString = generateTlv(invoiceData);
-    String base64String = tlvToBase64(tlvString);
-    return base64String;
-  }
+    // Generate TLV string
+    String tlvString = _generateTlv(invoiceData);
 
-  @override
-  Widget build(BuildContext context) {
-    return QRCode(
-      data: _getQrCodeContent(),
-      size: size,
-      eyeStyle: eyeStyle ??
-          const QREyeStyle(
-            eyeShape: QREyeShape.square,
-            color: Colors.black,
-          ),
-      backgroundColor: backgroundColor,
-    );
+    // Convert the TLV string to Base64
+    return _tlvToBase64(tlvString);
   }
 
   /// Converts a string to its hexadecimal representation.
-  String stringToHex(String input) {
+  String _stringToHex(String input) {
     return input.codeUnits
         .map((unit) => unit.toRadixString(16).padLeft(2, '0'))
         .join();
   }
 
   /// Generates a TLV string from a map of tag-value pairs.
-  String generateTlv(Map<int, String> data) {
+  String _generateTlv(Map<int, String> data) {
     StringBuffer tlv = StringBuffer();
 
     data.forEach((tag, value) {
-      String valueHex = stringToHex(value);
-      String lengthHex = value.length.toRadixString(16).padLeft(2, '0');
-      String tagHex = tag.toRadixString(16).padLeft(2, '0');
+      String tagHex =
+          tag.toRadixString(16).padLeft(2, '0'); // Convert tag to hex
+      String valueHex = _stringToHex(value); // Convert value to hex
+      String lengthHex =
+          value.length.toRadixString(16).padLeft(2, '0'); // Length in hex
 
+      // Concatenate tag, length, and value into the TLV structure
       tlv.write(tagHex);
       tlv.write(lengthHex);
       tlv.write(valueHex);
@@ -89,18 +82,29 @@ class Zatca2Invoice extends StatelessWidget {
   }
 
   /// Converts a TLV string to a Base64 encoded string.
-  String tlvToBase64(String tlv) {
+  String _tlvToBase64(String tlv) {
     List<int> bytes = [];
 
     for (int i = 0; i < tlv.length; i += 2) {
-      String hexStr = tlv.substring(i, i + 2);
-      int byte = int.parse(hexStr, radix: 16);
+      String hexStr = tlv.substring(i, i + 2); // Two hex characters at a time
+      int byte = int.parse(hexStr, radix: 16); // Parse as a byte
       bytes.add(byte);
     }
 
     Uint8List byteArray = Uint8List.fromList(bytes);
-    String base64Str = base64Encode(byteArray);
+    return base64Encode(byteArray); // Convert to Base64
+  }
 
-    return base64Str;
+  @override
+  Widget build(BuildContext context) {
+    return QRCode(
+      data: _getQrCodeContent(),
+      size: size,
+      eyeStyle: const QREyeStyle(
+        eyeShape: QREyeShape.square,
+        color: Colors.black,
+      ),
+      backgroundColor: backgroundColor,
+    );
   }
 }

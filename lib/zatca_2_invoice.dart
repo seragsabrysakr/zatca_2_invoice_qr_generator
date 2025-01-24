@@ -3,32 +3,19 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:qr_bar_code/qr/qr.dart';
+import 'package:zatca_2_invoice/models/qr_data_model.dart';
 
 class Zatca2InvoiceQrGenerator extends StatelessWidget {
   const Zatca2InvoiceQrGenerator({
     super.key,
-    required this.sellerName,
-    required this.sellerTRN,
-    required this.totalWithVat,
-    required this.totalVat,
-    required this.issueDate,
-    required this.invoiceHash,
-    required this.digitalSignature,
-    required this.publicKey,
-    required this.certificateSignature,
+    required this.qrDataModel,
+
     this.backgroundColor = Colors.transparent,
     this.size = 200,
   });
 
-  final String sellerName; // Seller's name
-  final String sellerTRN; // Seller's VAT registration number
-  final String totalWithVat; // Invoice total (including VAT)
-  final String totalVat; // Total VAT amount
-  final String issueDate; // ISO 8601 format date and time
-  final String invoiceHash; // SHA-256 hash of the invoice
-  final String digitalSignature; // ECDSA digital signature
-  final String publicKey; // Base64-encoded public key
-  final String certificateSignature; // Certificate authority signature
+  final QrDataModel qrDataModel; // Seller's name
+// Certificate authority signature
   final double size; // Size of the QR code
   final Color backgroundColor; // Background color of the QR code
 
@@ -36,15 +23,15 @@ class Zatca2InvoiceQrGenerator extends StatelessWidget {
   String _getQrCodeContent() {
     // Map of tag-value pairs for the ZATCA QR code
     Map<int, String> invoiceData = {
-      1: sellerName,
-      2: sellerTRN,
-      3: issueDate,
-      4: totalWithVat,
-      5: totalVat,
-      6: invoiceHash,
-      7: digitalSignature,
-      8: publicKey,
-      9: certificateSignature,
+      1: qrDataModel.sellerName,
+      2: qrDataModel.sellerTRN,
+      3: qrDataModel.issueDate,
+      4: qrDataModel.totalWithVat,
+      5: qrDataModel.totalVat,
+      6: qrDataModel.invoiceHash,
+      7: qrDataModel.digitalSignature,
+      8: qrDataModel.publicKey,
+      9: qrDataModel.certificateSignature,
     };
 
     // Generate TLV string

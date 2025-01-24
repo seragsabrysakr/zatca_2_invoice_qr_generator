@@ -16,7 +16,7 @@ class ZatcaConstants {
   static const String serialNumber =
       "1-POSMENA|2-Version2.0.1|3-21cf2f71-b225-43at";
   static const String mode = "Simulation";
-  static const String csrPem = """
+  static const String certificateBase64 = """
 -----BEGIN CERTIFICATE REQUEST-----
 MIICtTCCAlsCAQAwbTELMAkGA1UEBhMCU0ExEzARBgNVBAsMCjIwNTAwMDM5Nzcx
 FTATBgNVBAoMDE1haW4gdGVzdGluZzEyMDAGA1UEAwwpVGhlIEFyYWIgUGV0cm9s

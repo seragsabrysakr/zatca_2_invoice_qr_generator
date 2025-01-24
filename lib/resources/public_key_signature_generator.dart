@@ -26,7 +26,7 @@ Map<String, dynamic> parseCSR(String csrPem) {
   final publicKeyBitString = publicKeyInfo.elements[1] as ASN1BitString;
 
   // Extract raw public key bytes
-  final rawPublicKeyBytes = publicKeyBitString.contentBytes()!;
+  final rawPublicKeyBytes = publicKeyBitString.contentBytes();
   final domainParams = ECDomainParameters('prime256v1');
   ECPoint ecPublicKeyPoint;
 

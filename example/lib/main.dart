@@ -1,4 +1,4 @@
-import 'package:example/constants.dart';
+import 'package:example/zatca_constants.dart';
 import 'package:flutter/material.dart';
  import 'package:zatca_2_invoice/zatca_2_invoice_generator.dart';
 

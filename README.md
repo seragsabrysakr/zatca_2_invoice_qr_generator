@@ -15,7 +15,7 @@ For more info kindly visit the official [Zatca Docs.](https://zatca.gov.sa/en/E-
 
 ## Usage
 
-For full example of the code, kindly have a look here [/example](https://pub.dev/packages/zatca_fatoora_flutter/example) folder.
+For full example of the code, kindly have a look here [/example](https://pub.dev/packages/zatca_2_invoice_generator/example) folder.
 ### Initialize zacta in main.dart:
 
 ```dart
